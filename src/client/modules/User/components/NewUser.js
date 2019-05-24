@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import uuid from "uuid";
 
 class NewUser extends Component {
   state = {
+    id: uuid.v4(),
     name: "",
     surname: "",
     email: "",
@@ -17,22 +19,21 @@ class NewUser extends Component {
 
   handleFormSubmit = e => {
     e.preventDefault();
-    const { name, surname, email, eventDate } = this.state;
-    // if (name.trim() && surname.trim() && email.trim() && eventDate.trim()) {
-    this.props.onAddUser({ name, surname, email, eventDate });
-    this.setState({ name, surname, email, eventDate });
+    const { id, name, surname, email, eventDate } = this.state;
+    this.props.onAddUser({ id, name, surname, email, eventDate });
+    this.setState({ id, name, surname, email, eventDate });
     // this.handleReset();
-    // }
   };
 
-  handleReset = () => {
-    this.setState({
-      name: "",
-      surname: "",
-      email: "",
-      eventDate: ""
-    });
-  };
+  // handleReset = () => {
+  //   this.setState({
+  //     id: "",
+  //     name: "",
+  //     surname: "",
+  //     email: "",
+  //     eventDate: ""
+  //   });
+  // };
 
   render() {
     const { name, surname, email, eventDate } = this.state;
@@ -72,7 +73,6 @@ class NewUser extends Component {
           <div className="form-group">
             <input
               type="date"
-              placeholder="Email"
               className="form-control"
               name="eventDate"
               onChange={this.handleInputChange}

@@ -1,18 +1,20 @@
 import {
   ADD_USER,
-  // GET_USER,
+  SAVE_USER,
   EDIT_USER,
-  DELETE_USER
-  // FETCH_POST
+  GET_USER
+  // DELETE_USER,
 } from "../constants/ActionTypes";
 
 const UserReducer = (state = [], action) => {
   switch (action.type) {
     case ADD_USER:
-      return [...state, action.payload];
+      return [action.payload, ...state];
 
-    // case GET_USER:
-    //   return state.filter(user => user._id === action.id);
+    case SAVE_USER:
+      return Object.assign({}, state, {
+        state: state.filter(user => user.id !== action.id)
+      });
 
     case EDIT_USER:
       return state.map(user => {
@@ -21,11 +23,18 @@ const UserReducer = (state = [], action) => {
           : user;
       });
 
-    case DELETE_USER:
-      return state.filter(user => user._id !== action.payload.id);
+    case GET_USER:
+      return state.filter(user => user.id === action.id);
 
-    // case FETCH_USER:
-    //   return action.users;
+    // case EDIT_USER:
+    //   return state.map(user => {
+    //     return user.id === action.id
+    //       ? Object.assign({}, user, action.user)
+    //       : user;
+    //   });
+
+    // case DELETE_USER:
+    //   return state.filter(user => user._id !== action.payload.id);
 
     default:
       return state;
@@ -33,12 +42,3 @@ const UserReducer = (state = [], action) => {
 };
 
 export default UserReducer;
-
-// state.map((user)=>user.id === action.id ? {...user,editing:!user.editing}:user)
-
-// case EDIT_USER:
-//   return state.map(user => {
-//     return user.id === action.id
-//       ? Object.assign({}, user, action.user)
-//       : user;
-//   });

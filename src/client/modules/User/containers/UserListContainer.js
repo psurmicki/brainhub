@@ -1,14 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
-import {
-  deleteUserRequest
-  // editUserRequest
-  // getUserRequest
-} from "../actions/UserAction";
 
 import User from "../components/User";
+import { saveUserRequest } from "../actions/UserAction";
 
-const UserList = ({ user, onDeleteUser /*, onEditUser , onGetUser*/ }) => {
+const UserList = props => {
+  const { user, onSaveUser /*onEditUser, onDeleteUser */ } = props;
+
   if (!user.length) {
     return <div>No Users</div>;
   }
@@ -16,10 +14,11 @@ const UserList = ({ user, onDeleteUser /*, onEditUser , onGetUser*/ }) => {
     <div>
       {user.map(user => (
         <User
-          key={user._id}
+          key={user.id}
           user={user}
-          onDeleteUser={onDeleteUser}
+          onSaveUser={onSaveUser}
           // onEditUser={onEditUser}
+          // onDeleteUser={onDeleteUser}
           // onGetUser={onGetUser}
         />
       ))}
@@ -34,9 +33,9 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  onDeleteUser: id => dispatch(deleteUserRequest(id))
-  // onEditUser: id => dispatch(editUserRequest(id))
-  // onGetUser: id => dispatch(getUserRequest(id))
+  onSaveUser: user => dispatch(saveUserRequest(user))
+  // onEditUser: user => dispatch(editUser(user))
+  // onDeleteUser: id => dispatch(deleteUserRequest(id))
 });
 
 export default connect(
