@@ -5,6 +5,8 @@ const User = props => {
   const { user, onSaveUser, onGetUser } = props;
 
   return (
+    // console.log("user")
+    // console.log(user)
     <div className="userDetail" key={user.id}>
       <h2>User Data: </h2>
       <p>Name: {user.name}</p>

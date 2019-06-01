@@ -19,7 +19,9 @@ class App extends Component {
           <div className="col-md-6">
             <UserListContainer />
           </div>
-          <div>{<EditUser />}</div>
+          <div>
+            <EditUser />
+          </div>
         </div>
       </div>
     );

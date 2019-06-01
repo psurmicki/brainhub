@@ -12,11 +12,15 @@ class EditUser extends Component {
     eventDate: ""
   };
 
-  componentWillReceiveProps() {
-    // console.log("before");
-    // console.log(this.props);
-    if (this.props.user.length > 0) {
-      const { id, name, surname, email, eventDate } = this.props.user[0];
+  componentWillReceiveProps(nextProps) {
+    console.log("componentWillReceiveProps");
+    console.log(nextProps);
+    if (nextProps.user !== this.props.user) {
+      console.log("before");
+      console.log(this.props);
+      // console.log(this.props);
+
+      const { id, name, surname, email, eventDate } = this.props.user;
       console.log("if");
       console.log(this.props.user);
       this.setState({
@@ -64,6 +68,7 @@ class EditUser extends Component {
   };
 
   handleReset = () => {
+    console.log("reset");
     this.setState({
       id: "",
       name: "",
@@ -76,7 +81,8 @@ class EditUser extends Component {
   render() {
     console.log("render");
     console.log(this.props);
-
+    console.log(this.state);
+    console.log("render");
     return (
       <div>
         <div key={this.state.id}>

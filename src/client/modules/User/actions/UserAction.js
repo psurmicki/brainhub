@@ -54,6 +54,7 @@ export const getUser = data => {
 
 // Edit User
 export const editUser = data => {
+  console.log("editUser");
   console.log(data);
   return {
     type: EDIT_USER,

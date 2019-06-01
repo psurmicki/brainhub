@@ -5,23 +5,32 @@ import {
   GET_USER
 } from "../constants/ActionTypes";
 
-const UserReducer = (state = [], action) => {
+const UserReducer = (state = {}, action) => {
   switch (action.type) {
     case ADD_USER:
-      return [action.payload];
+      console.log("ADD_USER");
+      console.log(action.payload);
+
+      // state = action.payload;
+      return action.payload;
     // return [...state, action.payload];
 
     case CLEAR_DATA:
-      return (state = []);
+      return (state = {});
 
     case GET_USER:
-      console.log("reducer");
+      console.log("GET_USER");
       console.log(state);
-      return state[0];
+      console.log("GET_USER");
+      return state;
 
     case EDIT_USER:
+      console.log("EDIT_USER");
+      console.log(action.payload);
+      console.log(state);
       // return Object.assign({}, { user: action.payload });
-      return [action.payload];
+
+      return action.payload;
 
     default:
       return state;
