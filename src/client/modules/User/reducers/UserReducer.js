@@ -1,40 +1,27 @@
 import {
   ADD_USER,
-  SAVE_USER,
+  CLEAR_DATA,
   EDIT_USER,
   GET_USER
-  // DELETE_USER,
 } from "../constants/ActionTypes";
 
 const UserReducer = (state = [], action) => {
   switch (action.type) {
     case ADD_USER:
-      return [action.payload, ...state];
+      return [action.payload];
+    // return [...state, action.payload];
 
-    case SAVE_USER:
-      return Object.assign({}, state, {
-        state: state.filter(user => user.id !== action.id)
-      });
-
-    case EDIT_USER:
-      return state.map(user => {
-        return user.id === action.id
-          ? Object.assign({}, user, action.user)
-          : user;
-      });
+    case CLEAR_DATA:
+      return (state = []);
 
     case GET_USER:
-      return state.filter(user => user.id === action.id);
+      console.log("reducer");
+      console.log(state);
+      return state[0];
 
-    // case EDIT_USER:
-    //   return state.map(user => {
-    //     return user.id === action.id
-    //       ? Object.assign({}, user, action.user)
-    //       : user;
-    //   });
-
-    // case DELETE_USER:
-    //   return state.filter(user => user._id !== action.payload.id);
+    case EDIT_USER:
+      // return Object.assign({}, { user: action.payload });
+      return [action.payload];
 
     default:
       return state;
@@ -42,3 +29,10 @@ const UserReducer = (state = [], action) => {
 };
 
 export default UserReducer;
+
+// SAVE_USER,
+//
+// case SAVE_USER:
+//   return Object.assign({}, state, {
+//     state:state.filter(user => user.id !== action.id) }
+//   );

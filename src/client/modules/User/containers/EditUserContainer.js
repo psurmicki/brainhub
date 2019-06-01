@@ -1,51 +1,27 @@
-// import React, { Component } from "react";
+// import React from "react";
 
 // import { connect } from "react-redux";
-// import { editUser } from "../actions/UserAction";
+// // import { editUser } from "../actions/UserAction";
+// import { getUser } from "../actions/UserAction";
+
 // import EditUser from "../components/EditUser";
 
-// class EditUserContainer extends Component {
-
-//   render() {
-//     console.log("fsdfsdfsd");
-//     console.log(this.state);
-//     return (
-//       <div>
-//         <EditUser
-//           id={this.state.id}
-//           name={this.state.name}
-//           surname={this.state.surname}
-//           email={this.state.email}
-//           eventDate={this.state.eventDate}
-//         />
-//       </div>
-//     );
-//   }
-// }
-
-// // export default EditUserContainer;
-// // const EditUserContainer = props => {
-// //   const { user } = props;
-// //   console.log(props);
-// //   return (
-// //     <div>
-// //       <EditUser
-// //         id={user.id}
-// //         name={user.name}
-// //         surname={user.surname}
-// //         email={user.email}
-// //         eventDay={user.eventDay}
-// //       />
-// //     </div>
-// //   );
-// // };
+// const EditUserContainer = props => {
+//   const { user } = this.props.user;
+//   console.log(props);
+//   return (
+//     <div>
+//       <EditUser user={user} />
+//     </div>
+//   );
+// };
 
 // const mapStateToProps = state => ({
 //   user: state.user
 // });
 
 // const mapDispatchToProps = dispatch => ({
-//   onEditUser: user => dispatch(editUser(user))
+//   onEditUser: user => dispatch(getUser(user))
 // });
 
 // export default connect(

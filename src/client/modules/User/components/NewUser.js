@@ -22,18 +22,18 @@ class NewUser extends Component {
     const { id, name, surname, email, eventDate } = this.state;
     this.props.onAddUser({ id, name, surname, email, eventDate });
     this.setState({ id, name, surname, email, eventDate });
-    // this.handleReset();
+    this.handleReset();
   };
 
-  // handleReset = () => {
-  //   this.setState({
-  //     id: "",
-  //     name: "",
-  //     surname: "",
-  //     email: "",
-  //     eventDate: ""
-  //   });
-  // };
+  handleReset = () => {
+    this.setState({
+      id: "",
+      name: "",
+      surname: "",
+      email: "",
+      eventDate: ""
+    });
+  };
 
   render() {
     const { name, surname, email, eventDate } = this.state;

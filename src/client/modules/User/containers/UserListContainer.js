@@ -2,10 +2,10 @@ import React from "react";
 import { connect } from "react-redux";
 
 import User from "../components/User";
-import { saveUserRequest } from "../actions/UserAction";
+import { saveUserRequest, getUser } from "../actions/UserAction";
 
 const UserList = props => {
-  const { user, onSaveUser /*onEditUser, onDeleteUser */ } = props;
+  const { user, onSaveUser, onGetUser } = props;
 
   if (!user.length) {
     return <div>No Users</div>;
@@ -17,9 +17,7 @@ const UserList = props => {
           key={user.id}
           user={user}
           onSaveUser={onSaveUser}
-          // onEditUser={onEditUser}
-          // onDeleteUser={onDeleteUser}
-          // onGetUser={onGetUser}
+          onGetUser={onGetUser}
         />
       ))}
     </div>
@@ -33,9 +31,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  onSaveUser: user => dispatch(saveUserRequest(user))
-  // onEditUser: user => dispatch(editUser(user))
-  // onDeleteUser: id => dispatch(deleteUserRequest(id))
+  onSaveUser: user => dispatch(saveUserRequest(user)),
+  onGetUser: user => dispatch(getUser(user))
 });
 
 export default connect(
