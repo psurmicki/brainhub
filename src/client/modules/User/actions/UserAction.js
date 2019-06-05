@@ -1,14 +1,9 @@
-import {
-  ADD_USER,
-  CLEAR_DATA,
-  EDIT_USER,
-  GET_USER
-} from "../constants/ActionTypes";
+import { ADD_USER, CLEAR_DATA, EDIT_USER } from "../constants/ActionTypes";
 import axios from "axios";
 
 const apiUrl = "http://localhost:4000/user";
 
-// add User
+// add user
 export const addUser = data => {
   return {
     type: ADD_USER,
@@ -22,7 +17,7 @@ export const addUser = data => {
   };
 };
 
-// save User in DB
+// save user in DB
 export const saveUserRequest = ({ name, surname, email, eventDate }) => {
   return dispatch => {
     return axios
@@ -44,18 +39,8 @@ export const saveUserSuccess = data => {
   };
 };
 
-// Get User
-export const getUser = data => {
-  return {
-    type: GET_USER,
-    data
-  };
-};
-
-// Edit User
+// edit user
 export const editUser = data => {
-  console.log("editUser");
-  console.log(data);
   return {
     type: EDIT_USER,
     payload: {

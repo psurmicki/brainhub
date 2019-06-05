@@ -1,20 +1,22 @@
 import React from "react";
 import "./User.css";
 
-const User = props => {
-  const { user, onSaveUser, onGetUser } = props;
+export const User = props => {
+  const { user, onSaveUser, openEditor } = props;
 
   return (
-    // console.log("user")
-    // console.log(user)
     <div className="userDetail" key={user.id}>
       <h2>User Data: </h2>
       <p>Name: {user.name}</p>
       <p>Surname: {user.surname}</p>
       <p>Email: {user.email}</p>
       <p>Event Date: {user.eventDate}</p>
-      <button onClick={() => onSaveUser(user)}>Save User</button>
-      <button onClick={() => onGetUser(user)}>Edit User</button>
+      <button className="btn btn-success" onClick={() => onSaveUser(user)}>
+        Save User
+      </button>
+      <button className="btn btn-warning" onClick={() => openEditor(user.id)}>
+        Edit User
+      </button>
     </div>
   );
 };

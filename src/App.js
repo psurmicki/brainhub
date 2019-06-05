@@ -6,22 +6,43 @@ import UserListContainer from "./client/modules/User/containers/UserListContaine
 
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
-class App extends Component {
+export class App extends Component {
+  state = {
+    isEditorOpen: false,
+    editorId: null
+  };
+
+  openEditor = userId => {
+    this.setState({
+      isEditorOpen: true,
+      editorId: userId
+    });
+  };
+
+  closeEditor = () => {
+    this.setState({
+      isEditorOpen: false
+    });
+  };
+
   render() {
     return (
       <div className="container">
         <div className="row">
-          {
-            <div className="col-md-6">
-              <CreateNewUser />
-            </div>
-          }
           <div className="col-md-6">
-            <UserListContainer />
+            <CreateNewUser />
           </div>
-          <div>
-            <EditUser />
+          <div className="col-md-6">
+            <UserListContainer openEditor={this.openEditor} />
           </div>
+          {this.state.isEditorOpen && (
+            <div>
+              <EditUser
+                closeEditor={this.closeEditor}
+                editorId={this.state.editorId}
+              />
+            </div>
+          )}
         </div>
       </div>
     );

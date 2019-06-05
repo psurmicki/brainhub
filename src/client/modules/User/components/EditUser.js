@@ -1,56 +1,37 @@
-import React, { Component /*, PropTypes*/ } from "react";
+import React, { Component } from "react";
 
 import { connect } from "react-redux";
 import { editUser } from "../actions/UserAction";
 
-class EditUser extends Component {
-  state = {
-    id: "",
-    name: "",
-    surname: "",
-    email: "",
-    eventDate: ""
-  };
-
-  componentWillReceiveProps(nextProps) {
-    console.log("componentWillReceiveProps");
-    console.log(nextProps);
-    if (nextProps.user !== this.props.user) {
-      console.log("before");
-      console.log(this.props);
-      // console.log(this.props);
-
-      const { id, name, surname, email, eventDate } = this.props.user;
-      console.log("if");
-      console.log(this.props.user);
-      this.setState({
-        id: id,
-        name: name,
-        surname: surname,
-        email: email,
-        eventDate: eventDate
-      });
-    }
+export class EditUser extends Component {
+  constructor(props) {
+    super(props);
+    const { user, editorId } = props;
+    const { id, name, surname, email, eventDate } = user.find(
+      x => x.id === editorId
+    );
+    this.state = {
+      id: id,
+      name: name,
+      surname: surname,
+      email: email,
+      eventDate: eventDate
+    };
   }
 
-  // static getDerivedStateFromProps(props, state) {
-  //   console.log("before");
-  //   console.log(props);
-
-  //   if (props.id !== state.id) {
-  //     const { id, name, surname, email, eventDate } = this.props.user[0];
-  //     return {
-  //       id: id,
-  //       name: name,
-  //       surname: surname,
-  //       email: email,
-  //       eventDate: eventDate
-  //     };
-  //   }
-
-  //   // Return null if the state hasn't changed
-  //   return null;
-  // }
+  componentWillReceiveProps(props) {
+    const { user, editorId } = props;
+    const { id, name, surname, email, eventDate } = user.find(
+      x => x.id === editorId
+    );
+    this.setState({
+      id: id,
+      name: name,
+      surname: surname,
+      email: email,
+      eventDate: eventDate
+    });
+  }
 
   handleInputChange = e => {
     const { name, value } = e.target;
@@ -63,12 +44,10 @@ class EditUser extends Component {
     e.preventDefault();
     const { id, name, surname, email, eventDate } = this.state;
     this.props.onEditUser({ id, name, surname, email, eventDate });
-    this.setState({ id, name, surname, email, eventDate });
-    this.handleReset();
+    this.props.closeEditor();
   };
 
   handleReset = () => {
-    console.log("reset");
     this.setState({
       id: "",
       name: "",
@@ -79,10 +58,6 @@ class EditUser extends Component {
   };
 
   render() {
-    console.log("render");
-    console.log(this.props);
-    console.log(this.state);
-    console.log("render");
     return (
       <div>
         <div key={this.state.id}>
@@ -135,7 +110,14 @@ class EditUser extends Component {
                 className="btn btn-warning"
                 onClick={this.handleReset}
               >
-                Reset
+                Clean Form
+              </button>
+              <button
+                type="button"
+                className="btn btn-danger"
+                onClick={this.props.closeEditor}
+              >
+                Cancel
               </button>
             </div>
           </form>
@@ -144,20 +126,6 @@ class EditUser extends Component {
     );
   }
 }
-// type="submit" className="btn btn-primary"
-// EditUser.propTypes = {
-//   user: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       id: PropTypes.string.isRequired,
-//       name: PropTypes.string.isRequired,
-//       surname: PropTypes.string.isRequired,
-//       email: PropTypes.string.isRequired,
-//       eventDate: PropTypes.string.isRequired
-//     })
-//   ).isRequired
-// };
-
-// export default EditUser;
 
 const mapStateToProps = state => ({
   user: state.user
@@ -171,65 +139,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(EditUser);
-
-// const { user: users } = this.props;
-// return (
-//   <div>
-//     {users.map(user => (
-//       <div key={user.id}>
-//         <form onSubmit={this.handleFormSubmit}>
-//           <div className="form-group">
-//             <input
-//               type="text"
-//               placeholder="Name"
-//               className="form-control"
-//               name="name"
-//               onChange={this.handleInputChange}
-//               value={user.name}
-//             />
-//           </div>
-//           <div className="form-group">
-//             <input
-//               type="text"
-//               // placeholder="Surname"
-//               placeholder="Surname"
-//               className="form-control"
-//               name="surname"
-//               onChange={this.handleInputChange}
-//               value={user.surname}
-//             />
-//           </div>
-//           <div className="form-group">
-//             <input
-//               type="email"
-//               placeholder="Email"
-//               className="form-control"
-//               name="email"
-//               onChange={this.handleInputChange}
-//               value={user.email}
-//             />
-//           </div>
-//           <div className="form-group">
-//             <input
-//               type="date"
-//               className="form-control"
-//               name="eventDate"
-//               onChange={this.handleInputChange}
-//               value={user.eventDate}
-//             />
-//           </div>
-//           <div className="form-group">
-//             <button type="submit" className="btn btn-primary">
-//               Edit User
-//             </button>
-//             <button
-//               type="button"
-//               className="btn btn-warning"
-//               onClick={this.handleReset}
-//             >
-//               Reset
-//             </button>
-//           </div>
-//         </form>
-//       </div>
-//     ))}

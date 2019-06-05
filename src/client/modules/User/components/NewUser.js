@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import uuid from "uuid";
 
-class NewUser extends Component {
+export class NewUser extends Component {
   state = {
-    id: uuid.v4(),
+    id: "",
     name: "",
     surname: "",
     email: "",
@@ -19,9 +19,9 @@ class NewUser extends Component {
 
   handleFormSubmit = e => {
     e.preventDefault();
-    const { id, name, surname, email, eventDate } = this.state;
+    const id = uuid.v4();
+    const { name, surname, email, eventDate } = this.state;
     this.props.onAddUser({ id, name, surname, email, eventDate });
-    this.setState({ id, name, surname, email, eventDate });
     this.handleReset();
   };
 
